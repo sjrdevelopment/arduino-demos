@@ -1,0 +1,52 @@
+<html>
+<head>
+   
+    <script src="http://0.0.0.0:8082/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="http://anthonyterrien.com/js/jquery.knob.js"></script>
+
+    <style>
+
+        #dial-area {
+          display: block;
+          position:relative;
+          z-index: 999;
+          margin: 40px;
+          margin-bottom: 80px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+<div id="dial-area">
+  <input type="text" value="0" class="dial trunk" data-min="0" data-max="255" data-angleArc="149" data-angleOffset="-74" data-width="500">
+</div>
+
+<script>
+
+
+var socket = io('http://localhost:8082');
+
+$(function() {
+  // update this in real time in demo...
+    $(".dial").knob({
+      'change': function(v) {
+        console.log(v)
+        socket.emit('uiDialChange', v);
+      }
+    });
+});
+
+
+
+socket.on("moveDial", function(val) {
+    console.log("move dial to " + val);
+    $('.dial').val(val).trigger('change');
+});
+
+</script> 
+</body>
+</html>
