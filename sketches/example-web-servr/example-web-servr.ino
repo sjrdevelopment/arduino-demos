@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 
 char ssid[] = "BTHub4-52R2";      // your network SSID (name)
-char pass[] = "bfc24d8db3";   // your network password
+char pass[] = "";   // your network password
 
 int ledPin = 13;
 
